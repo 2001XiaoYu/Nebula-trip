@@ -1,4 +1,22 @@
+:root {
+    --primary-color: #ff9854;
+
+    /* 全局修改： 任何只要用到-vab-tabbar-item-icon-size都会被修改掉 */
+    /* --van-tabbar-item-icon-item: 30px !important */
+
+    /* 全局修改: 修改search样式 */
+    --van-search-left-icon-color: var(--primary-color) !important;
+}
+
 body {
     font-size: 14px;
-    font-family: 'Courier New', Courier, monospace;
+}
+
+.top-page {
+    position: relative;
+    z-index: 9;
+    height: 100vh;
+    background-color: #fff;
+
+    overflow-y: auto;
 }
