@@ -5,3 +5,9 @@ export function getHomeHotSuggests() {
         url: "/home/hotSuggests" 
     })
 }
+
+export function getHomeCategories() {
+    return XYRequest.get({
+        url: "/home/categories"
+    })
+}
