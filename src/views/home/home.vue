@@ -76,7 +76,7 @@ watch(isReachBottom, (newValue)  =>  {
 //     isShowSearchBar.value = newTop > 100
 // })
 
-//定义可响应式的数据，依赖另外一个可响应式的数据，那么可以使用计算属性(computed)
+//定义可响应式的数据，依赖另外一个可响应式的数据，那么可以使用计算函数(computed)
 const isShowSearchBar = computed(() => {
     return scrollTop.value >= 100
 })
