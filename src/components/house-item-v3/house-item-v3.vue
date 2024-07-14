@@ -23,12 +23,16 @@
 
 <script setup>
 
-defineProps({
+const props = defineProps({
     itemData: {
         type: Object,
         default: () => ({})
     }
 })
+
+// const itemClick = () => {
+//     console.log("itemClick", props.itemData.houseId);
+// }
 </script>
 
 <style lang="less" scoped>
