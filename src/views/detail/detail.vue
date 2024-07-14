@@ -17,7 +17,7 @@ import { computed, ref } from 'vue'
 import { useRoute, useRouter } from 'vue-router'
 import { getDetailInfos } from '@/service'
 
-import DetailSwipe from './cpns/detail-swipe.vue'
+import DetailSwipe from './cpns/detail_01-swipe.vue'
 
 const router = useRouter()
 const route = useRoute()
