@@ -2,7 +2,7 @@
   <div class="app">
     <!-- name属性 -->
     <router-view v-slot="props">
-      <keep-alive includes="home">
+      <keep-alive include="home">
         <component :is="props.Component"></component>
       </keep-alive>
     </router-view>

@@ -54,7 +54,7 @@ const houseId = route.params.id
 
 // 发送网络请求获取数据
 const detailInfos = ref({})
-const mainPart = computed(() => detailInfos.value.mainPart)
+const mainPart = computed(() => detailInfos.value?.mainPart)
 getDetailInfos(houseId).then(res => {
     detailInfos.value = res.data
 })
