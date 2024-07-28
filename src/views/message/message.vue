@@ -1,5 +1,5 @@
 <template>
-  <div class="message">
+  <div class="message top-page">
       <nav-bar title="消息中心"></nav-bar>
       <div class="content">
           <img src="@/assets/img/message/icon_message.png" alt="">

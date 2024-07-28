@@ -1,3 +1,4 @@
+import useAuthStore from "@/stores/modules/auth";
 import { createRouter, createWebHashHistory,  } from "vue-router";
 
 const router = createRouter({
@@ -14,15 +15,18 @@ const router = createRouter({
         },
         {
             path: "/favor",
-            component: () => import("@/views/favor/favor.vue")
+            component: () => import("@/views/favor/favor.vue"),
+            meta: { requiresAuth: true }
         },
         {
             path: "/order",
-            component: () => import("@/views/order/order.vue")
+            component: () => import("@/views/order/order.vue"),
+            meta: { requiresAuth: true }
         },
         {
             path: "/message",
-            component: () => import("@/views/message/message.vue")
+            component: () => import("@/views/message/message.vue"),
+            meta: { requiresAuth: true }
         },
         {
             path: "/city",
@@ -38,8 +42,35 @@ const router = createRouter({
         {
             path: "/detail/:id",
             component: () => import("@/views/detail/detail.vue"),
-        }
+        },
+        {
+            path: "/login",
+            component: () => import("@/views/login/login.vue")
+        }, 
     ]
+})
+
+// 导航守卫
+// router.beforeEach((to, from, next) => {
+//   const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true'; // 检查登录状态
+//   console.log(isLoggedIn); 
+//   if (to.matched.some(record => record.meta.requiresAuth) && !isLoggedIn) {
+//     next({ path: '/login' });
+//   } else {
+//     next();
+//   }
+// });
+router.beforeEach((to, from, next) => {
+  const authStore = useAuthStore()
+  const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true' // 检查登录状态
+  authStore.setLoginStatus(isLoggedIn) // 更新 Pinia 状态
+  console.log(authStore.isLoggedIn)
+
+  if (to.matched.some(record => record.meta.requiresAuth) && !authStore.isLoggedIn) {
+    next({ path: '/login' });
+  } else {
+    next()
+  }
 })
 
 export default router
