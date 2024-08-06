@@ -62,28 +62,42 @@ import { useRouter } from 'vue-router';
 
 
 const router = useRouter()
-
-//定义Props
-// defineProps({
-//     hotSuggests: {
-//         type: Array,
-//         default: () => []
-//     }
-// })
-
 // 城市、位置
 const cityClick = () => {
   router.push("/city")
 }
 
+// const positionClick = () => {
+//   navigator.geolocation.getCurrentPosition(res => {
+//     // console.log("获取位置成功:", res);
+//     console.log("经度:", res.coords.latitude, "纬度:", res.coords.longitude);
+//   }, err => {
+//     console.log("获取位置失败:", err);
+//   })
+// }
+// 获取当前位置城市名称
 const positionClick = () => {
-  navigator.geolocation.getCurrentPosition(res => {
-    // console.log("获取位置成功:", res);
-    console.log("经度:", res.coords.latitude, "纬度:", res.coords.longitude);
-  }, err => {
-    console.log("获取位置失败:", err);
-  })
-}
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(position => {
+      const lat = position.coords.latitude;
+      const lng = position.coords.longitude;
+
+      // 使用百度地图 API 获取当前城市
+      const point = new BMap.Point(lng, lat);
+      const geoc = new BMap.Geocoder();
+      geoc.getLocation(point, (rs) => {
+        console.log('定位信息:', rs);
+        const addComp = rs.addressComponents;
+        console.log("详细地址信息:", addComp);
+        currentCity.value.cityName = addComp.city;
+      });
+    }, error => {
+      console.error('定位失败', error);
+    });
+  } else {
+    console.error('浏览器不支持地理位置');
+  }
+};
 
 
 const cityStore = useCityStore()

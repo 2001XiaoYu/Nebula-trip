@@ -22,6 +22,7 @@
             <detail-notice name="须知" :ref="getSectionRef" :order-rules="mainPart.dynamicModule.rulesModule.orderRules"/>
             <detail-map name="周边" :ref="getSectionRef" :position="mainPart.dynamicModule.positionModule"/>
             <detail-intro :price-intro="mainPart.introductionModule" />
+            <detail-action-bar :current-house="currentHouse"/>
         </div>
         <div class="footer">
           <img src="@/assets/img/detail/icon_ensure.png" alt="">
@@ -45,6 +46,7 @@ import DetailComment from './cpns/detail_05-comment.vue'
 import DetailNotice from './cpns/detail_06-notice.vue'
 import DetailMap from './cpns/detail_07-map.vue'
 import DetailIntro from './cpns/detail_08-intro.vue'
+import DetailActionBar from "./cpns/detail-action-bar.vue"
 import useScroll from '@/hooks/useScroll.js'
 
 const router = useRouter()
@@ -55,6 +57,7 @@ const houseId = route.params.id
 // 发送网络请求获取数据
 const detailInfos = ref({})
 const mainPart = computed(() => detailInfos.value?.mainPart)
+const currentHouse = computed(() =>detailInfos.value.currentHouse)
 getDetailInfos(houseId).then(res => {
     detailInfos.value = res.data
 })
@@ -146,6 +149,7 @@ watch(scrollTop, (newValue) => {
   align-items: center;
   justify-content: center;
   height: 120px;
+  margin-bottom: 40px;
 
   img {
     width: 123px;
